@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Animation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+        .one {
+            height: 100px;
+            width: 100px;
+            background-color: orange;
+            border-radius: 100px;
+            position: absolute;
+            left: 35px;
+            top: 35px;
+
+        }
+
+        @keyframes widthIncrease {
+            0% {
+                width: 100px
+            }
+
+            50% {
+                width: 329px;
+            }
+
+            100% {
+                width: 100px
+            }
+        }
+
+        @keyframes heightIncrease {
+            0% {
+                height: 100px
+            }
+
+            50% {
+                height: 329px
+            }
+
+            100% {
+                height: 100px
+            }
+        }
+
+
+        .animateOneandFour {
+            animation: widthIncrease 2s infinite;
+
+        }
+
+        .animateTwoandThree {
+            animation: heightIncrease 2s infinite;
+
+        }
+
+        .two {
+            height: 100px;
+            width: 100px;
+            background-color: green;
+            border-radius: 100px;
+            position: absolute;
+            bottom: 35px;
+            left: 35px
+        }
+
+
+        .three {
+            height: 100px;
+            width: 100px;
+            background-color: yellow;
+            border-radius: 100px;
+            position: absolute;
+            right: 35px;
+            top: 35px;
+
+        }
+
+        .four {
+            height: 100px;
+            width: 100px;
+            background-color: lightblue;
+            border-radius: 100px;
+            position: absolute;
+            right: 35px;
+            bottom: 35px
+        }
+
+        .parent {
+
+            position: relative;
+            height: 400px;
+            width: 400px;
+            margin: auto;
+
+        }
+
+        .buttons {
+            margin: auto;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+
+
+        .button_style {
+            margin: 20px;
+            padding: 5px 20px 5px 20px;
+            border: outset;
+            background-color: #32AFA9;
+            color: white;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+
+
+        <div class="two" id="bottomLeft">
+
+        </div>
+
+        <div class="four" id="bottomRight">
+
+        </div>
+
+
+
+
+        <div class="three" id="topRight">
+
+        </div>
+        <div class="one" id="topLeft">
+
+        </div>
+
+    </div>
+    <div class="buttons">
+        <button class="button_style" id="start">Start</button>
+        <button class="button_style" id="stop">Stop</button>
+    </div>
+    <script>
+        const startButton = document.getElementById('start');
+        const stopButton = document.getElementById('stop');
+        const firstCircle = document.getElementById('topLeft');
+        const secondCircle = document.getElementById('bottomLeft');
+        const thirdCircle = document.getElementById('topRight');
+        const fourthCircle = document.getElementById('bottomRight');
+
+        var intervalTimer = null;
+
+
+        startButton.addEventListener('click',
+            function addAnimation() {
+                firstCircle.classList.add('animateOneandFour');
+                secondCircle.classList.add('animateTwoandThree');
+                thirdCircle.classList.add('animateTwoandThree');
+                fourthCircle.classList.add('animateOneandFour');
+                changeColor();
+
+            });
+
+        stopButton.addEventListener('click',
+            function removeAnimation() {
+                firstCircle.classList.remove('animateOneandFour');
+                secondCircle.classList.remove('animateTwoandThree');
+                thirdCircle.classList.remove('animateTwoandThree');
+                fourthCircle.classList.remove('animateOneandFour');
+                clearInterval(intervalTimer);
+            });
+
+        function changeColor() {
+
+            let colors = ['orange', 'green', 'yellow', 'lightblue'];
+            intervalTimer = setInterval(function colorRotation() {
+
+                rotateRight(colors);
+                firstCircle.style.backgroundColor = colors[0];
+                secondCircle.style.backgroundColor = colors[1];
+                thirdCircle.style.backgroundColor = colors[2];
+                fourthCircle.style.backgroundColor = colors[3];
+
+
+            }, 2000);
+
+
+        }
+
+        function rotateRight(arr) {
+            let last = arr.pop();
+            arr.unshift(last);
+            return arr;
+        }
+
+    </script>
+</body>
+
+</html>
